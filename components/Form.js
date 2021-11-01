@@ -7,7 +7,34 @@ const Form = () => {
       <View style={styles.form}>
         <View>
           <Text style={styles.label}>Paciente:</Text>
-          <TextInput style={styles.input} />
+          <TextInput
+            style={styles.input}
+            onChange={(texto) => console.log(texto)}
+          />
+        </View>
+        <View>
+          <Text style={styles.label}>Dueño:</Text>
+          <TextInput
+            style={styles.input}
+            onChange={(texto) => console.log(texto)}
+          />
+        </View>
+        <View>
+          <Text style={styles.label}>Teléfono Contacto:</Text>
+          <TextInput
+            style={styles.input}
+            onChange={(texto) => console.log(texto)}
+            keyboardType='numeric'
+          />
+        </View>
+        <View>
+          <Text style={styles.label}>Síntomas:</Text>
+          <TextInput
+            multiline
+            style={styles.input}
+            onChange={(texto) => console.log(texto)}
+            keyboardType='numeric'
+          />
         </View>
       </View>
     </>
