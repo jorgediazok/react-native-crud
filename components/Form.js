@@ -1,7 +1,22 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, TextInput } from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableHighlight,
+} from 'react-native';
 
 const Form = () => {
+  const [paciente, setPaciente] = useState('');
+  const [propietario, setPropietario] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [sintomas, setSintomas] = useState('');
+
+  const crearNuevaCita = () => {
+    console.log('CREAR NUEVA CITA');
+  };
+
   return (
     <>
       <View style={styles.form}>
@@ -9,21 +24,21 @@ const Form = () => {
           <Text style={styles.label}>Paciente:</Text>
           <TextInput
             style={styles.input}
-            onChange={(texto) => console.log(texto)}
+            onChange={(texto) => setPaciente(texto)}
           />
         </View>
         <View>
           <Text style={styles.label}>Dueño:</Text>
           <TextInput
             style={styles.input}
-            onChange={(texto) => console.log(texto)}
+            onChange={(texto) => setPropietario(texto)}
           />
         </View>
         <View>
           <Text style={styles.label}>Teléfono Contacto:</Text>
           <TextInput
             style={styles.input}
-            onChange={(texto) => console.log(texto)}
+            onChange={(texto) => setTelefono(texto)}
             keyboardType='numeric'
           />
         </View>
@@ -32,9 +47,17 @@ const Form = () => {
           <TextInput
             multiline
             style={styles.input}
-            onChange={(texto) => console.log(texto)}
+            onChange={(texto) => setSintomas(texto)}
             keyboardType='numeric'
           />
+        </View>
+        <View>
+          <TouchableHighlight
+            onPress={() => crearNuevaCita()}
+            style={styles.btnSubmit}
+          >
+            <Text style={styles.textoSubmit}>Crear Cita &times;</Text>
+          </TouchableHighlight>
         </View>
       </View>
     </>
@@ -59,6 +82,19 @@ const styles = StyleSheet.create({
     borderColor: '#e1e1e1',
     borderWidth: 1,
     borderStyle: 'solid',
+  },
+  btnSubmit: {
+    padding: 10,
+    backgroundColor: '#7d024e',
+    marginVertical: 10,
+  },
+  textoSubmit: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  texto: {
+    fontSize: 18,
   },
 });
 
