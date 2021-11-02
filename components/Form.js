@@ -2,24 +2,54 @@ import React, { useState } from 'react';
 import {
   Text,
   StyleSheet,
+  Alert,
   View,
   TextInput,
+  ScrollView,
   TouchableHighlight,
 } from 'react-native';
+import shortid from 'shortid';
 
-const Form = () => {
+const Form = ({ citas, setCitas, setMostrarForm }) => {
   const [paciente, setPaciente] = useState('');
   const [propietario, setPropietario] = useState('');
   const [telefono, setTelefono] = useState('');
   const [sintomas, setSintomas] = useState('');
 
   const crearNuevaCita = () => {
-    console.log('CREAR NUEVA CITA');
+    //VALIDACION
+    if (
+      paciente.trim() === '' ||
+      propietario.trim() === '' ||
+      telefono.trim() === '' ||
+      sintomas.trim() === ''
+    ) {
+      mostrarAlerta();
+      return;
+    }
+    //CREAR CITA
+    const cita = { paciente, propietario, telefono, fecha, hora, sintomas };
+    cita.id = shortid.generate();
+    const citasNuevas = [...citas, cita];
+    setCitas(citasNuevas);
+
+    //OCULTAR FORMULARIO
+    setMostrarForm(false);
+
+    //RESETEAR FORMULARIO
+  };
+
+  const mostrarAlerta = () => {
+    Alert.alert('Error', 'Todos los campos son obligatorios', [
+      {
+        text: 'OK',
+      },
+    ]);
   };
 
   return (
     <>
-      <View style={styles.form}>
+      <ScrollView style={styles.form}>
         <View>
           <Text style={styles.label}>Paciente:</Text>
           <TextInput
@@ -59,7 +89,7 @@ const Form = () => {
             <Text style={styles.textoSubmit}>Crear Cita &times;</Text>
           </TouchableHighlight>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 };
@@ -69,7 +99,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    marginHorizontal: '2.5%',
   },
   label: {
     fontWeight: 'bold',
